@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import useModelLoader from './hooks/tf-toxic';
+import TextModerate from './components/TextModerate/TextModerate';
+import { AppBar, Box, Container, Skeleton, Toolbar } from '@mui/material';
 
 function App() {
+  const { isModelLoading, modelInstance } = useModelLoader();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AppBar position="static" color="secondary">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Container>
+        <Box sx={{
+          margin: '50px 0',
+        }}>
+          {isModelLoading ? (
+            <Skeleton variant="rounded" fullWidth height={60} />
+          ) : (
+            <TextModerate modelInstance={modelInstance} />
+          )}
+        </Box>
+      </Container>
+    </>
   );
 }
 
