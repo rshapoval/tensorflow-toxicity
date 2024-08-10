@@ -1,7 +1,7 @@
-import './App.css';
 import useModelLoader from './hooks/tf-toxic';
 import TextModerate from './components/TextModerate/TextModerate';
-import { AppBar, Box, Container, Skeleton, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, Link, Skeleton, Toolbar } from '@mui/material';
+import { ReactComponent as Logo } from './assets/logo.svg';
 
 function App() {
   const { isModelLoading, modelInstance } = useModelLoader();
@@ -11,6 +11,9 @@ function App() {
       <AppBar position="static" color="secondary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            <Link href="/" width={200}>
+              <Logo />
+            </Link>
           </Toolbar>
         </Container>
       </AppBar>
@@ -19,7 +22,7 @@ function App() {
           margin: '50px 0',
         }}>
           {isModelLoading ? (
-            <Skeleton variant="rounded" fullWidth height={60} />
+            <Skeleton variant="rounded" height={60} />
           ) : (
             <TextModerate modelInstance={modelInstance} />
           )}

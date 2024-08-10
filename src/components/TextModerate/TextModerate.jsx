@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { List, ListItem, ListItemText, TextField } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 const TextModerate = ({ modelInstance }) => {
@@ -52,9 +52,9 @@ const TextModerate = ({ modelInstance }) => {
       }
 
       return (
-        <p key={label}>
-          {emoji} {text}
-        </p>
+        <ListItem key={label}>
+          <ListItemText primary={`${emoji} ${text}`} />
+        </ListItem>
       );
     });
   };
@@ -69,7 +69,9 @@ const TextModerate = ({ modelInstance }) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <div>{getModerationResult()}</div>
+      <List>
+        {getModerationResult()}
+      </List>
     </>
   );
 };
