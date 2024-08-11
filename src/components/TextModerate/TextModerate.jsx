@@ -25,7 +25,7 @@ const TextModerate = ({ modelInstance }) => {
   }, [modelInstance, delayedValue]);
 
   const getModerationResult = () => {
-    if (predictions.length === 0) return "";
+    if (predictions.length === 0 || !delayedValue) return "";
 
     return predictions.map((prediction) => {
       const match = prediction.results[0].match;
